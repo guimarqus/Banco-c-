@@ -6,10 +6,10 @@ namespace ConsoleApp32
 {
     class Conta
     {
-        public double SaldoBancario {  get; private set; }
+        public decimal SaldoBancario {  get; private set; }
         public int Id { get; set; }
         public string Nome { get; private set; }
-        public List<Movimentacao> Movimentacoes { get; set; }
+        
 
 
         private Conta(string nome)
@@ -27,14 +27,11 @@ namespace ConsoleApp32
             
         }
       
-        public double ObterSaldoBancario()
+        public  decimal ObterSaldoBancario()
         {
             return SaldoBancario = 0;
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+     
     }
 }

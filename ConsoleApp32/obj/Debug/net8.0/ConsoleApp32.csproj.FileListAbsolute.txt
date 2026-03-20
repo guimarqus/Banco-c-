@@ -12,3 +12,4 @@ C:\Users\guilherme.guimaraes\source\repos\ConsoleApp32\ConsoleApp32\obj\Debug\ne
 C:\Users\guilherme.guimaraes\source\repos\ConsoleApp32\ConsoleApp32\obj\Debug\net8.0\ConsoleApp32.pdb
 C:\Users\guilherme.guimaraes\source\repos\ConsoleApp32\ConsoleApp32\obj\Debug\net8.0\ConsoleApp32.genruntimeconfig.cache
 C:\Users\guilherme.guimaraes\source\repos\ConsoleApp32\ConsoleApp32\obj\Debug\net8.0\ref\ConsoleApp32.dll
+C:\Users\guilherme.guimaraes\source\repos\ConsoleApp32\ConsoleApp32\obj\Debug\net8.0\ConsoleApp32.sourcelink.json
