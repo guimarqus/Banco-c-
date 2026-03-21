@@ -1,15 +1,19 @@
-﻿namespace ConsoleApp32
+﻿using System;
+using static ConsoleApp32.Movimentacao;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace ConsoleApp32
 {
     class Movimentacao
     {
 
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public TipoMovimentacao TipodeMovimentacao { get; set; }
-        public decimal Valor { get; set; }
-        public List<Movimentacao> Movimentacoes { get; set; }
+        public double Valor { get; private set; }
+        
 
 
-        public static void AcessarMovimentacao(Conta conta)
+        public static void AcessarMenuMovimentacao()
         {
             Console.Clear();
             bool opcaoValida = false;
@@ -19,24 +23,24 @@
                 Console.Clear();
                 Console.WriteLine("Bem vindo");
                 Console.WriteLine("Escolha uma opção:");
-                Console.WriteLine("1 - Depósito");
-                Console.WriteLine("2 - Pagamento");
+                Console.WriteLine("1 - Credito");
+                Console.WriteLine("2 - Debito");
                 Console.WriteLine("3 - Sair");
                 int opcaoMovimentacao = int.Parse(Console.ReadLine());
                 switch (opcaoMovimentacao)
                 {
                     case 1:
-                        DepositoMenu(conta.SaldoBancario);
+                        RealizarMovimentacaoCredito();
                         opcaoValida = true;
                         break;
 
                     case 2:
-                        PagamentoMenu();
+                        ;
                         opcaoValida = true;
                         break;
                     case 3:
                         int opcoes = 0;
-                        Opcoes.EscolherOpcoes(opcoes, saldo );
+                        Opcoes.EscolherOpcoes(opcoes);
                         break;
 
                     default:
@@ -49,73 +53,52 @@
             }
         }
 
-
-        public static void DepositoMenu(decimal saldo)
+        public static void RealizarMovimentacaoCredito()
         {
-            bool opcaoValida = false;
-            while (!opcaoValida)
-            {
-                Console.Clear();
-                Console.WriteLine("1- PIX");
-                Console.WriteLine("2- Transferência");
-                Console.WriteLine("3- Sair");
-                Console.WriteLine("Escolha a operação que deseja realizar: ");
-                int opcaoMovimentacao = int.Parse(Console.ReadLine());
-                switch (opcaoMovimentacao)
-                {
-                    case 1:
-                        Pix(saldo);
-                        opcaoValida = true;
-                        break;
-                    case 2:
-                        PagamentoMenu();
-                        opcaoValida = true;
-                        break;
-                    default:
-                        AcessarMovimentacao(saldo);
-                        break;
-
-
-                }
-            }
-
+            Console.WriteLine("Digite o valor que voce deseja adicionar");
+            double creditoAdd = double.Parse(Console.ReadLine());
+            Movimentacao mov = Movimentacao.CriarMov(creditoAdd);
+            Console.WriteLine($"Foram adicionados {mov.Valor} $ a sua conta");
+            
         }
-
-        private static void Pix(decimal saldo)
+        public static void RealizarMovimentacaoDebito(Conta conta)
         {
-            Console.WriteLine("Bem vindo ");
-            Console.WriteLine("1- Pagar");
-            Console.WriteLine("2- Receber");
-            int opcaoMovimentacao = int.Parse(Console.ReadLine());
-            switch (opcaoMovimentacao)
-            {
-                case 1:
-                    Console.WriteLine();
-                    Console.Write("Insira a chave pix que deseja pagar: ");
-                    Console.WriteLine("O seu saldo é: " + saldo);
-                    break;
-            }
-        }
-        private static void PagamentoMenu()
-        {
+            Console.WriteLine("Debito");
+            Console.WriteLine("Digite o valor que voce deseja debitar");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Deseja ver o saldo disponivel para resgate ?");
+            Console.ResetColor();
+            Console.WriteLine();
 
+            double debitoRemov = double.Parse(Console.ReadLine());
+            Movimentacao mov = Movimentacao.CriarMov(debitoRemov);
+            //decimal saldoAtual = Conta.GetSaldoBancario();
+
+            //if (debitoRemov >0) 
 
 
         }
-
 
         public enum TipoMovimentacao
         {
+            Credito = 1,
             Debito,
-            Credito,
-            Pix,
-            Transferencia,
+
         }
 
-        public Movimentacao(int id, decimal valor)
+
+        private Movimentacao(double valor, TipoMovimentacao tipoMovimentacao)
         {
-            Id = id;
+            Id = Random.Shared.Next();
             Valor = valor;
+            tipoMovimentacao = tipoMovimentacao;
+        }
+        public static Movimentacao CriarMov(double valor)
+        {
+
+            return new Movimentacao(valor);
+
+
         }
     }
 }

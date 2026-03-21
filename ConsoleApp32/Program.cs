@@ -5,7 +5,7 @@ namespace Banco
 {
 
     class Program
-    {
+    { 
         static void Main(string[] args)
         {
             Console.WriteLine("Digite os dados do usuario");
@@ -21,7 +21,7 @@ namespace Banco
             Console.WriteLine("4- Sair");
             Console.WriteLine();
             int escolha = int.Parse(Console.ReadLine());
-            var opcao = Opcoes.EscolherOpcoes(escolha, conta.SaldoBancario);
+            var opcao = Opcoes.EscolherOpcoes(escolha);
            
 
         }

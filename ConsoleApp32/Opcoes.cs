@@ -7,7 +7,7 @@ namespace ConsoleApp32
     class Opcoes
     {
         private int opcoes { get; set; }
-        public static int EscolherOpcoes(int _opcoes, decimal saldo)
+        public static int EscolherOpcoes(int _opcoes)
         {
             
             Console.Clear();
@@ -15,7 +15,7 @@ namespace ConsoleApp32
             {
                 case 1:
                     Console.WriteLine("Movimentar conta");
-                    Movimentacao.AcessarMovimentacao(saldo);
+                    Movimentacao.AcessarMenuMovimentacao();
                     break;
 
                 case 2:
@@ -27,7 +27,7 @@ namespace ConsoleApp32
                     break;
 
                 case 4:
-                    
+                    Console.WriteLine("Sair do menu");
 
                     break;
 

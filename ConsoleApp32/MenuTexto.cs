@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp32
 {
-    internal class MenuTexto
+     class MenuTexto
     {
     }
 }
