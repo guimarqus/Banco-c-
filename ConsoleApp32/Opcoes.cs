@@ -6,37 +6,37 @@ namespace ConsoleApp32
 {
     class Opcoes
     {
-        private int opcoes { get; set; }
-        public static int EscolherOpcoes(int _opcoes)
+        private int OpcoesMetodo { get; set; }
+        public static void EscolherOpcoes(Conta conta)
         {
-            
+            MenuTexto.TextoMenuOptions();
+            int escolha = int.Parse(Console.ReadLine());
             Console.Clear();
-            switch (_opcoes)
+            switch (escolha)
             {
                 case 1:
-                    Console.WriteLine("Movimentar conta");
-                    Movimentacao.AcessarMenuMovimentacao();
+                    Movimentacao.AcessarMenuMovimentacao(conta);
                     break;
 
                 case 2:
-                    Console.WriteLine("Visualizar histórico");
+                    Historico.MostrarHistorico(conta);
                     break;
 
                 case 3:
-                    Console.WriteLine("Acessar saldo");
+                    Conta.MostrarSaldo(conta);
                     break;
 
                 case 4:
-                    Console.WriteLine("Sair do menu");
-
+                    MenuTexto.TextoCriarConta();
                     break;
+                    
 
                 default:
                     Console.WriteLine("Opção inválida");
                     break;
             }
 
-            return _opcoes;
+            return;
         }
 
        

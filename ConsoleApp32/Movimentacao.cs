@@ -9,11 +9,11 @@ namespace ConsoleApp32
 
         public int Id { get; private set; }
         public TipoMovimentacao TipodeMovimentacao { get; set; }
-        public double Valor { get; private set; }
-        
+        public decimal Valor { get; private set; }
 
 
-        public static void AcessarMenuMovimentacao()
+
+        public static void AcessarMenuMovimentacao(Conta conta)
         {
             Console.Clear();
             bool opcaoValida = false;
@@ -30,17 +30,17 @@ namespace ConsoleApp32
                 switch (opcaoMovimentacao)
                 {
                     case 1:
-                        RealizarMovimentacaoCredito();
+                        RealizarMovimentacaoCredito(conta);
                         opcaoValida = true;
                         break;
 
                     case 2:
-                        ;
+                        RealizarMovimentacaoDebito(conta);
                         opcaoValida = true;
                         break;
                     case 3:
-                        int opcoes = 0;
-                        Opcoes.EscolherOpcoes(opcoes);
+                        opcaoValida = true;
+                        Opcoes.EscolherOpcoes(conta);
                         break;
 
                     default:
@@ -53,30 +53,68 @@ namespace ConsoleApp32
             }
         }
 
-        public static void RealizarMovimentacaoCredito()
+        public static void RealizarMovimentacaoCredito(Conta conta)
         {
-            Console.WriteLine("Digite o valor que voce deseja adicionar");
-            double creditoAdd = double.Parse(Console.ReadLine());
-            Movimentacao mov = Movimentacao.CriarMov(creditoAdd);
-            Console.WriteLine($"Foram adicionados {mov.Valor} $ a sua conta");
-            
+            bool repetir = true;
+            while (repetir)
+            {
+                Console.WriteLine("Digite o valor que voce deseja adicionar");
+                decimal creditoAdd = decimal.Parse(Console.ReadLine());
+                Movimentacao mov = Movimentacao.CriarMov(creditoAdd, TipoMovimentacao.Credito);
+                conta.SomarContaCredito(mov.Valor);
+                Console.WriteLine($"Foram adicionados {mov.Valor}$ a sua conta, seu saldo atual é de {conta.SaldoBancario}$");
+                Console.WriteLine("Deseja realizar outra operação? (digite 0 para adicionar mais ao seu saldo ou digite " +
+                    "qualquer número para seguir ao menu) ");
+                int continuarOperacao = int.Parse(Console.ReadLine());
+                if ( continuarOperacao == 0 )
+                {
+                    repetir = true;
+                }
+                else
+                {
+                    repetir = false;
+                   AcessarMenuMovimentacao(conta);
+
+                }
+            }
         }
         public static void RealizarMovimentacaoDebito(Conta conta)
         {
-            Console.WriteLine("Debito");
-            Console.WriteLine("Digite o valor que voce deseja debitar");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Deseja ver o saldo disponivel para resgate ?");
-            Console.ResetColor();
-            Console.WriteLine();
+            bool repetir = true;
+            while (repetir)
+            {
+                Console.WriteLine("Digite o valor que voce deseja debitar");
+                Console.WriteLine($"O seu saldo atual é de { conta.SaldoBancario}$");
+                decimal debitoRemov = decimal.Parse(Console.ReadLine());
+                Movimentacao mov = Movimentacao.CriarMov(debitoRemov, TipoMovimentacao.Debito);
 
-            double debitoRemov = double.Parse(Console.ReadLine());
-            Movimentacao mov = Movimentacao.CriarMov(debitoRemov);
-            //decimal saldoAtual = Conta.GetSaldoBancario();
+                if (debitoRemov > conta.SaldoBancario)
+                {
+                    repetir = true;
+                    Console.WriteLine("Saldo disponivel insuficiente");
+                    RealizarMovimentacaoDebito(conta);
+                    return;
+                }
+                else
+                {
+                    conta.SubtrairContaDebito(debitoRemov);
+                    Console.WriteLine($"Foram debitados {mov.Valor}$ da sua conta, seu saldo atual é {conta.SaldoBancario}$");
+                    Console.WriteLine("Deseja realizar outra operação? (digite 0 para continuar ou digite " +
+                    "qualquer número para seguir ao menu) ");
+                    int continuarOperacao = int.Parse(Console.ReadLine());
+                    if (continuarOperacao == 0)
+                    {
+                        repetir = true;
+                    }
+                    else
+                    {
+                        repetir = false;
+                        AcessarMenuMovimentacao(conta);
 
-            //if (debitoRemov >0) 
-
-
+                    }
+                }
+                Console.WriteLine();
+            }
         }
 
         public enum TipoMovimentacao
@@ -87,16 +125,16 @@ namespace ConsoleApp32
         }
 
 
-        private Movimentacao(double valor, TipoMovimentacao tipoMovimentacao)
+        private Movimentacao(decimal valor, TipoMovimentacao tipoMovimentacao)
         {
             Id = Random.Shared.Next();
             Valor = valor;
-            tipoMovimentacao = tipoMovimentacao;
+            TipodeMovimentacao = tipoMovimentacao;
         }
-        public static Movimentacao CriarMov(double valor)
+        public static Movimentacao CriarMov(decimal valor, TipoMovimentacao tipoMovimentacao)
         {
 
-            return new Movimentacao(valor);
+            return new Movimentacao(valor, tipoMovimentacao);
 
 
         }
