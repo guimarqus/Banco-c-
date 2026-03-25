@@ -10,9 +10,6 @@ namespace ConsoleApp32
         public int Id { get; private set; }
         public TipoMovimentacao TipodeMovimentacao { get; set; }
         public decimal Valor { get; private set; }
-
-
-
         public static void AcessarMenuMovimentacao(Conta conta)
         {
             Console.Clear();
@@ -20,36 +17,8 @@ namespace ConsoleApp32
 
             while (!opcaoValida)
             {
-                Console.Clear();
-                Console.WriteLine("Bem vindo");
-                Console.WriteLine("Escolha uma opção:");
-                Console.WriteLine("1 - Credito");
-                Console.WriteLine("2 - Debito");
-                Console.WriteLine("3 - Sair");
-                int opcaoMovimentacao = int.Parse(Console.ReadLine());
-                switch (opcaoMovimentacao)
-                {
-                    case 1:
-                        RealizarMovimentacaoCredito(conta);
-                        opcaoValida = true;
-                        break;
-
-                    case 2:
-                        RealizarMovimentacaoDebito(conta);
-                        opcaoValida = true;
-                        break;
-                    case 3:
-                        opcaoValida = true;
-                        Opcoes.EscolherOpcoes(conta);
-                        break;
-
-                    default:
-                        Console.WriteLine("Digite apenas as opções informadas");
-                        Thread.Sleep(1500);
-                        break;
-                }
-
-
+                Texto.TextoParaEscolhaDasOperacoes();
+                Opcoes.MenuOpcoesParaMovimentar(conta);
             }
         }
 
@@ -58,13 +27,11 @@ namespace ConsoleApp32
             bool repetir = true;
             while (repetir)
             {
-                Console.WriteLine("Digite o valor que voce deseja adicionar");
+                Texto.AdicionarCredito(conta);
                 decimal creditoAdd = decimal.Parse(Console.ReadLine());
-                Movimentacao mov = Movimentacao.CriarMov(creditoAdd, TipoMovimentacao.Credito);
+                Movimentacao mov = CriarMov(creditoAdd, TipoMovimentacao.Credito);
                 conta.SomarContaCredito(mov.Valor);
-                Console.WriteLine($"Foram adicionados {mov.Valor}$ a sua conta, seu saldo atual é de {conta.SaldoBancario}$");
-                Console.WriteLine("Deseja realizar outra operação? (digite 0 para adicionar mais ao seu saldo ou digite " +
-                    "qualquer número para seguir ao menu) ");
+                Texto.MostrarResultadoCredito(conta, mov);
                 int continuarOperacao = int.Parse(Console.ReadLine());
                 if ( continuarOperacao == 0 )
                 {
@@ -81,12 +48,11 @@ namespace ConsoleApp32
         public static void RealizarMovimentacaoDebito(Conta conta)
         {
             bool repetir = true;
-            while (repetir)
+            while ((repetir))
             {
-                Console.WriteLine("Digite o valor que voce deseja debitar");
-                Console.WriteLine($"O seu saldo atual é de { conta.SaldoBancario}$");
+                Texto.DebitarSaldo(conta);
                 decimal debitoRemov = decimal.Parse(Console.ReadLine());
-                Movimentacao mov = Movimentacao.CriarMov(debitoRemov, TipoMovimentacao.Debito);
+                Movimentacao mov = CriarMov(debitoRemov, TipoMovimentacao.Debito);
 
                 if (debitoRemov > conta.SaldoBancario)
                 {
@@ -98,9 +64,7 @@ namespace ConsoleApp32
                 else
                 {
                     conta.SubtrairContaDebito(debitoRemov);
-                    Console.WriteLine($"Foram debitados {mov.Valor}$ da sua conta, seu saldo atual é {conta.SaldoBancario}$");
-                    Console.WriteLine("Deseja realizar outra operação? (digite 0 para continuar ou digite " +
-                    "qualquer número para seguir ao menu) ");
+                    Texto.MostraResultadoDebito(conta, mov);
                     int continuarOperacao = int.Parse(Console.ReadLine());
                     if (continuarOperacao == 0)
                     {

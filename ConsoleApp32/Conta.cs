@@ -19,7 +19,7 @@ namespace ConsoleApp32
         private Conta(string nome)
         {
             Id = Random.Shared.Next();
-            Nome = nome.ToUpper();
+            Nome = nome;
             SaldoBancario = ObterSaldoBancario();
             Movimentacoes = new List<Movimentacao>();
             Date = DateTime.Now;
@@ -58,13 +58,12 @@ namespace ConsoleApp32
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($"{ conta.SaldoBancario}$");
                 Console.ResetColor();
-                Console.WriteLine();
-                Console.WriteLine("Deseja voltar ao menu de operações? (digite 0 para continuar no menu ou qualquer numero para prosseguir)");
+                Texto.SairDoSaldo();
                 int optSaldo = int.Parse(Console.ReadLine());
                 if (optSaldo > 0)
                 {
                     continua = false;
-                    Opcoes.EscolherOpcoes(conta);
+                    Opcoes.MenuOpcoesIniciais(conta);
                 }
                 else
                 {

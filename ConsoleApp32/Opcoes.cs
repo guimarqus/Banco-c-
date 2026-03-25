@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Globalization;
 using System.Xml;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleApp32
 {
     class Opcoes
     {
-        private int OpcoesMetodo { get; set; }
-        public static void EscolherOpcoes(Conta conta)
+        public static void MenuOpcoesIniciais(Conta conta)
         {
-            MenuTexto.TextoMenuOptions();
+            Texto.TextoMenuDasOpcoesIniciais();
             int escolha = int.Parse(Console.ReadLine());
             Console.Clear();
-            switch (escolha)
+            OpcoesDoMenuInicial opcao = (OpcoesDoMenuInicial)escolha;
+            switch (opcao)
             {
-                case 1:
+                case OpcoesDoMenuInicial.Movimentar:
                     Movimentacao.AcessarMenuMovimentacao(conta);
                     break;
 
-                case 2:
+                case OpcoesDoMenuInicial.Historico:
                     Historico.MostrarHistorico(conta);
                     break;
 
-                case 3:
+                case OpcoesDoMenuInicial.Saldo:
                     Conta.MostrarSaldo(conta);
                     break;
 
-                case 4:
-                    MenuTexto.TextoCriarConta();
+                case OpcoesDoMenuInicial.Voltar:
+                    Texto.TextoParaCriacaoDeConta();
                     break;
                     
 
@@ -39,8 +40,52 @@ namespace ConsoleApp32
             return;
         }
 
-       
-       
+       public static void MenuOpcoesParaMovimentar(Conta conta)
+        {
+            bool opcaoValida = false;
+            int opcaoMovimentacao = int.Parse(Console.ReadLine());
+            OpcoesParaMovimentar opcao = (OpcoesParaMovimentar)opcaoMovimentacao;
+            switch (opcao)
+            {
+                case OpcoesParaMovimentar.Credito:
+                    Movimentacao.RealizarMovimentacaoCredito(conta);
+                    opcaoValida = true;
+                    break;
+
+                case OpcoesParaMovimentar.Debito:
+                   Movimentacao.RealizarMovimentacaoDebito(conta);
+                    opcaoValida = true;
+                    break;
+                case OpcoesParaMovimentar.Sair:
+                    opcaoValida = true;
+                    Opcoes.MenuOpcoesIniciais(conta);
+                    break;
+
+                default:
+                    Console.WriteLine("Digite apenas as opções informadas");
+                    Thread.Sleep(1500);
+                    break;
+
+            }
+
+
+        }
+
+        enum OpcoesDoMenuInicial
+        {
+            Movimentar = 1,
+            Historico,
+            Saldo,
+            Voltar,
+        }
+
+        enum OpcoesParaMovimentar
+        {
+            Credito = 1,
+            Debito,
+            Sair,
+
+        }
 
 
     }

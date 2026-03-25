@@ -22,7 +22,18 @@ namespace ConsoleApp32
                 if (conta.Movimentacoes.Count == 0)
                 {
                     Console.WriteLine("Nenhuma movimentação registrada.");
-                    return;
+                    Texto.SairDoHistorico();
+                    int optSaldo = int.Parse(Console.ReadLine());
+                    if (optSaldo > 0)
+                    {
+                        continua = false;
+                        Opcoes.MenuOpcoesIniciais(conta);
+                    }
+                    else
+                    {
+                        continua = true;
+
+                    }
                 }
 
                 Console.WriteLine($"Histórico da conta de {conta.Nome}:");
@@ -31,13 +42,12 @@ namespace ConsoleApp32
                     Console.WriteLine();
                     Console.WriteLine($"ID: {mov.Id} | Tipo: {mov.TipodeMovimentacao} | Valor: {mov.Valor:C}  | Data: {conta.Date}");
                 }
-                Console.WriteLine("--------------------------------------------------------------------------------------");
-                Console.WriteLine("Deseja voltar ao menu de operações? (digite 0 para continuar no menu ou qualquer numero para prosseguir)");
-                int optSaldo = int.Parse(Console.ReadLine());
-                if (optSaldo > 0)
+                Texto.SairDoHistorico();
+                int optOutroSaldo = int.Parse(Console.ReadLine());
+                if (optOutroSaldo > 0)
                 {
                     continua = false;
-                    Opcoes.EscolherOpcoes(conta);
+                    Opcoes.MenuOpcoesIniciais(conta);
                 }
                 else
                 {
