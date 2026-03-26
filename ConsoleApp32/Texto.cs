@@ -38,7 +38,6 @@ namespace ConsoleApp32
             Console.WriteLine("1 - Credito");
             Console.WriteLine("2 - Debito");
             Console.WriteLine("3 - Sair");
-
         }
 
         public static void AdicionarCredito(Conta conta)
@@ -69,8 +68,10 @@ namespace ConsoleApp32
         public static void SairDoHistorico()
         {
             Console.WriteLine("--------------------------------------------------------------------------------------");
-            Console.WriteLine("Deseja voltar ao menu de operações? (digite 0 para continuar no menu ou qualquer numero para prosseguir)");
+            Console.WriteLine("Deseja voltar ao menu de operações? (digite qualquer numero para prosseguir)");
+            Console.WriteLine("Para ver o saldo da sua conta digite 1");
         }
+        
         public static void SairDoSaldo()
         {
             Console.WriteLine();

@@ -44,14 +44,15 @@ namespace ConsoleApp32
                 }
                 Texto.SairDoHistorico();
                 int optOutroSaldo = int.Parse(Console.ReadLine());
-                if (optOutroSaldo > 0)
+                if (optOutroSaldo > 1)
                 {
                     continua = false;
                     Opcoes.MenuOpcoesIniciais(conta);
                 }
                 else
                 {
-                    continua = true;
+                    Conta.MostrarSaldo(conta);
+                    continua = false;
 
                 }
             }
