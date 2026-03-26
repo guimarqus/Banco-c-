@@ -11,7 +11,7 @@ namespace ConsoleApp32
     class Texto
     {
 
-        public static void TextoMenuDasOpcoesIniciais()
+        public static void MenuDasOpcoesIniciais()
         {
 
             Console.WriteLine("Bem vindo ao Menu ");
@@ -27,9 +27,7 @@ namespace ConsoleApp32
         {
             Console.WriteLine("Digite os dados do usuario");
             Console.Write("Nome do usuario: ");
-            var nome = Console.ReadLine();
-            var conta = Conta.CriarConta(nome);
-            Opcoes.MenuOpcoesIniciais(conta);
+            Conta.SolicitarDadosParaConta();
         }
 
         public static void TextoParaEscolhaDasOperacoes()

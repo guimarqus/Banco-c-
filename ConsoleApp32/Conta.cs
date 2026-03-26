@@ -27,9 +27,17 @@ namespace ConsoleApp32
 
         public static Conta CriarConta(string nome)
         {
-          
+            
             return new Conta(nome);
         }
+        public static void SolicitarDadosParaConta()
+        {
+            var nome = Console.ReadLine();
+            var conta = Conta.CriarConta(nome);
+            Opcoes.MenuOpcoesIniciais(conta);
+
+        }
+
         public  decimal ObterSaldoBancario()
         {
             return SaldoBancario;

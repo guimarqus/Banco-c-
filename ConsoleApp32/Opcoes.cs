@@ -9,7 +9,7 @@ namespace ConsoleApp32
     {
         public static void MenuOpcoesIniciais(Conta conta)
         {
-            Texto.TextoMenuDasOpcoesIniciais();
+            Texto.MenuDasOpcoesIniciais();
             int escolha = int.Parse(Console.ReadLine());
             Console.Clear();
             OpcoesDoMenuInicial opcao = (OpcoesDoMenuInicial)escolha;
