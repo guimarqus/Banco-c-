@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp32
+﻿namespace ConsoleApp32
 {
     class Historico
     {
@@ -21,8 +15,8 @@ namespace ConsoleApp32
             {
                 if (conta.Movimentacoes.Count == 0)
                 {
-                    Console.WriteLine("Nenhuma movimentação registrada.");
-                    Texto.SairDoHistorico();
+                    Instrucoes.NenhumaMovimentacao();
+                    Instrucoes.SairDoHistorico();
                     int optSaldo = int.Parse(Console.ReadLine());
                     if (optSaldo > 0)
                     {
@@ -40,9 +34,9 @@ namespace ConsoleApp32
                 foreach (var mov in conta.Movimentacoes)
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"ID: {mov.Id} | Tipo: {mov.TipodeMovimentacao} | Valor: {mov.Valor:C}  | Data: {conta.Date}");
+                    Console.WriteLine($"ID: {mov.Id} | Tipo: {mov.TipodeMovimentacao} | Valor: {mov.Valor:C}  | Data: {mov.Date}");
                 }
-                Texto.SairDoHistorico();
+                Instrucoes.SairDoHistorico();
                 int optOutroSaldo = int.Parse(Console.ReadLine());
                 if (optOutroSaldo > 1)
                 {

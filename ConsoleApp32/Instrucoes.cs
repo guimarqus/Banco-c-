@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static ConsoleApp32.Movimentacao;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace ConsoleApp32
+﻿namespace ConsoleApp32
 {
-    class Texto
+    class Instrucoes
     {
 
-        public static void MenuDasOpcoesIniciais()
+        public static void MenuDasOpcoesIniciais(Conta conta)
         {
 
-            Console.WriteLine("Bem vindo ao Menu ");
+            Console.WriteLine($"Bem vindo {conta.Nome}");
             Console.WriteLine("Selecione a ação que deseja realizar");
             Console.WriteLine("1- Movimentar sua Conta");
             Console.WriteLine("2- Visualizar o Historico");
@@ -70,6 +62,10 @@ namespace ConsoleApp32
             Console.WriteLine("--------------------------------------------------------------------------------------");
             Console.WriteLine("Deseja voltar ao menu de operações? (digite qualquer numero para prosseguir)");
             Console.WriteLine("Para ver o saldo da sua conta digite 1");
+        }
+        public static void NenhumaMovimentacao()
+        {
+            Console.WriteLine("Nenhuma movimentação registrada.");
         }
         
         public static void SairDoSaldo()

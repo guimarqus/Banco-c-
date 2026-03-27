@@ -8,7 +8,7 @@ namespace Banco
     { 
         static void Main(string[] args)
         {
-            Texto.TextoParaCriacaoDeConta();
+            Instrucoes.TextoParaCriacaoDeConta();
 
         }
 

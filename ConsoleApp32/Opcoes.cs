@@ -1,15 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Xml;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace ConsoleApp32
+﻿namespace ConsoleApp32
 {
     class Opcoes
     {
         public static void MenuOpcoesIniciais(Conta conta)
         {
-            Texto.MenuDasOpcoesIniciais();
+            Instrucoes.MenuDasOpcoesIniciais(conta);
             int escolha = int.Parse(Console.ReadLine());
             Console.Clear();
             OpcoesDoMenuInicial opcao = (OpcoesDoMenuInicial)escolha;
@@ -28,7 +23,7 @@ namespace ConsoleApp32
                     break;
 
                 case OpcoesDoMenuInicial.Voltar:
-                    Texto.TextoParaCriacaoDeConta();
+                    Instrucoes.TextoParaCriacaoDeConta();
                     break;
                     
 
@@ -58,7 +53,7 @@ namespace ConsoleApp32
                     break;
                 case OpcoesParaMovimentar.Sair:
                     opcaoValida = true;
-                    Opcoes.MenuOpcoesIniciais(conta);
+                    MenuOpcoesIniciais(conta);
                     break;
 
                 default:

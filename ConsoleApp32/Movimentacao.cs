@@ -1,8 +1,4 @@
-﻿using System;
-using static ConsoleApp32.Movimentacao;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace ConsoleApp32
+﻿namespace ConsoleApp32
 {
     class Movimentacao
     {
@@ -10,6 +6,7 @@ namespace ConsoleApp32
         public int Id { get; private set; }
         public TipoMovimentacao TipodeMovimentacao { get; set; }
         public decimal Valor { get; private set; }
+        public DateTime Date { get; private set; }
         public static void AcessarMenuMovimentacao(Conta conta)
         {
             Console.Clear();
@@ -17,21 +14,21 @@ namespace ConsoleApp32
 
             while (!opcaoValida)
             {
-                Texto.TextoParaEscolhaDasOperacoes();
+                Instrucoes.TextoParaEscolhaDasOperacoes();
                 Opcoes.MenuOpcoesParaMovimentar(conta);
             }
         }
-
+       
         public static void RealizarMovimentacaoCredito(Conta conta)
         {
             bool repetir = true;
             while (repetir)
             {
-                Texto.AdicionarCredito(conta);
+                Instrucoes.AdicionarCredito(conta);
                 decimal creditoAdd = decimal.Parse(Console.ReadLine());
                 Movimentacao mov = CriarMov(creditoAdd, TipoMovimentacao.Credito);
                 conta.SomarContaCredito(mov.Valor);
-                Texto.MostrarResultadoCredito(conta, mov);
+                Instrucoes.MostrarResultadoCredito(conta, mov);
                 int continuarOperacao = int.Parse(Console.ReadLine());
                 if ( continuarOperacao == 0 )
                 {
@@ -50,7 +47,7 @@ namespace ConsoleApp32
             bool repetir = true;
             while ((repetir))
             {
-                Texto.DebitarSaldo(conta);
+                Instrucoes.DebitarSaldo(conta);
                 decimal debitoRemov = decimal.Parse(Console.ReadLine());
                 Movimentacao mov = CriarMov(debitoRemov, TipoMovimentacao.Debito);
 
@@ -64,7 +61,7 @@ namespace ConsoleApp32
                 else
                 {
                     conta.SubtrairContaDebito(debitoRemov);
-                    Texto.MostraResultadoDebito(conta, mov);
+                    Instrucoes.MostraResultadoDebito(conta, mov);
                     int continuarOperacao = int.Parse(Console.ReadLine());
                     if (continuarOperacao == 0)
                     {
@@ -94,6 +91,7 @@ namespace ConsoleApp32
             Id = Random.Shared.Next();
             Valor = valor;
             TipodeMovimentacao = tipoMovimentacao;
+            Date = DateTime.UtcNow;
         }
         public static Movimentacao CriarMov(decimal valor, TipoMovimentacao tipoMovimentacao)
         {

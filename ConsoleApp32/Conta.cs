@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using static ConsoleApp32.Movimentacao;
+﻿using static ConsoleApp32.Movimentacao;
 
 namespace ConsoleApp32
 {
@@ -13,8 +8,7 @@ namespace ConsoleApp32
         public int Id { get; set; }
         public string Nome { get; private set; }
         public List<Movimentacao> Movimentacoes { get; private set; }
-        public DateTime Date { get; private set; }
-
+        
 
         private Conta(string nome)
         {
@@ -22,7 +16,7 @@ namespace ConsoleApp32
             Nome = nome;
             SaldoBancario = ObterSaldoBancario();
             Movimentacoes = new List<Movimentacao>();
-            Date = DateTime.Now;
+            
         }
 
         public static Conta CriarConta(string nome)
@@ -33,7 +27,7 @@ namespace ConsoleApp32
         public static void SolicitarDadosParaConta()
         {
             var nome = Console.ReadLine();
-            var conta = Conta.CriarConta(nome);
+            var conta = CriarConta(nome);
             Opcoes.MenuOpcoesIniciais(conta);
 
         }
@@ -46,14 +40,14 @@ namespace ConsoleApp32
         {
 
             SaldoBancario += valor;
-            Movimentacoes.Add(Movimentacao.CriarMov(valor, TipoMovimentacao.Credito));
+            Movimentacoes.Add(CriarMov(valor, TipoMovimentacao.Credito));
 
         }
         public void SubtrairContaDebito(decimal valor)
         {
 
             SaldoBancario -= valor;
-            Movimentacoes.Add(Movimentacao.CriarMov(valor, TipoMovimentacao.Debito));
+            Movimentacoes.Add(CriarMov(valor, TipoMovimentacao.Debito));
             
         }
 
@@ -62,11 +56,12 @@ namespace ConsoleApp32
             bool continua = true;
             while (continua)
             {
+                Console.WriteLine();
                 Console.Write($"Bem vindo {conta.Nome} o seu saldo atual é de ");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write($"{ conta.SaldoBancario}$");
+                Console.Write($"{conta.SaldoBancario:C}");
                 Console.ResetColor();
-                Texto.SairDoSaldo();
+                Instrucoes.SairDoSaldo();
                 int optSaldo = int.Parse(Console.ReadLine());
                 if (optSaldo > 0)
                 {
