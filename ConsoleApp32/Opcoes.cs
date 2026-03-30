@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp32
+﻿
+
+namespace ConsoleApp32
 {
     class Opcoes
     {
@@ -7,22 +9,22 @@
             Instrucoes.MenuDasOpcoesIniciais(conta);
             int escolha = int.Parse(Console.ReadLine());
             Console.Clear();
-            OpcoesDoMenuInicial opcao = (OpcoesDoMenuInicial)escolha;
+            Enums.OpcoesDoMenuInicial opcao = (Enums.OpcoesDoMenuInicial)escolha;
             switch (opcao)
             {
-                case OpcoesDoMenuInicial.Movimentar:
+                case Enums.OpcoesDoMenuInicial.Movimentar:
                     Movimentacao.AcessarMenuMovimentacao(conta);
                     break;
 
-                case OpcoesDoMenuInicial.Historico:
+                case Enums.OpcoesDoMenuInicial.Historico:
                     Historico.MostrarHistorico(conta);
                     break;
 
-                case OpcoesDoMenuInicial.Saldo:
+                case Enums.OpcoesDoMenuInicial.Saldo:
                     Conta.MostrarSaldo(conta);
                     break;
 
-                case OpcoesDoMenuInicial.Voltar:
+                case Enums.OpcoesDoMenuInicial.Voltar:
                     Instrucoes.TextoParaCriacaoDeConta();
                     break;
                     
@@ -39,19 +41,19 @@
         {
             bool opcaoValida = false;
             int opcaoMovimentacao = int.Parse(Console.ReadLine());
-            OpcoesParaMovimentar opcao = (OpcoesParaMovimentar)opcaoMovimentacao;
+            Enums.OpcoesParaMovimentar opcao = (Enums.OpcoesParaMovimentar)opcaoMovimentacao;
             switch (opcao)
             {
-                case OpcoesParaMovimentar.Credito:
+                case Enums.OpcoesParaMovimentar.Credito:
                     Movimentacao.RealizarMovimentacaoCredito(conta);
                     opcaoValida = true;
                     break;
 
-                case OpcoesParaMovimentar.Debito:
+                case Enums.OpcoesParaMovimentar.Debito:
                    Movimentacao.RealizarMovimentacaoDebito(conta);
                     opcaoValida = true;
                     break;
-                case OpcoesParaMovimentar.Sair:
+                case Enums.OpcoesParaMovimentar.Sair:
                     opcaoValida = true;
                     MenuOpcoesIniciais(conta);
                     break;
@@ -66,21 +68,7 @@
 
         }
 
-        enum OpcoesDoMenuInicial
-        {
-            Movimentar = 1,
-            Historico,
-            Saldo,
-            Voltar,
-        }
-
-        enum OpcoesParaMovimentar
-        {
-            Credito = 1,
-            Debito,
-            Sair,
-
-        }
+        
 
 
     }
