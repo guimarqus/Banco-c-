@@ -2,7 +2,12 @@
 {
     public class Enums
     {
-
+        public enum OpcoesParaConta
+        {
+            ContaCorrente = 1,
+            ContaPoupanca,
+            Sair,
+        }
         public enum OpcoesDoMenuInicial
         {
             Movimentar = 1,

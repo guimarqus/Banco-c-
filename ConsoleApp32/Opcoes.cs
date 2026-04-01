@@ -1,9 +1,37 @@
 ﻿
 
+using System.Linq.Expressions;
+
 namespace ConsoleApp32
 {
     class Opcoes
     {
+        public static Conta MenuParaCriacaoConta(string nome)
+        {
+            Conta conta;
+            int escolha = int.Parse(Console.ReadLine());
+            Enums.OpcoesParaConta opcao = (Enums.OpcoesParaConta)escolha;
+            switch (opcao)
+            {
+                case Enums.OpcoesParaConta.ContaPoupanca:
+                     return new ContaPoupanca(nome);
+                   
+                case Enums.OpcoesParaConta.ContaCorrente:
+                     return new ContaCorrente(nome);
+
+                case Enums.OpcoesParaConta.Sair:
+                    Console.WriteLine("Saindo");
+                    Thread.Sleep(1000);
+                    Environment.Exit(0);
+                    break;
+                   
+                default:
+                    Console.WriteLine("Opção Inválida");
+                    MenuParaCriacaoConta(nome);
+                    break;
+            }
+            return null;
+        }
         public static void MenuOpcoesIniciais(Conta conta)
         {
             Instrucoes.MenuDasOpcoesIniciais(conta);
@@ -21,13 +49,13 @@ namespace ConsoleApp32
                     break;
 
                 case Enums.OpcoesDoMenuInicial.Saldo:
-                    Conta.MostrarSaldo(conta);
+                    conta.MostrarSaldo(conta);
                     break;
 
                 case Enums.OpcoesDoMenuInicial.Voltar:
                     Instrucoes.TextoParaCriacaoDeConta();
                     break;
-                    
+
 
                 default:
                     Console.WriteLine("Opção inválida");
@@ -37,7 +65,7 @@ namespace ConsoleApp32
             return;
         }
 
-       public static void MenuOpcoesParaMovimentar(Conta conta)
+        public static void MenuOpcoesParaMovimentar(Conta conta)
         {
             bool opcaoValida = false;
             int opcaoMovimentacao = int.Parse(Console.ReadLine());
@@ -50,7 +78,7 @@ namespace ConsoleApp32
                     break;
 
                 case Enums.OpcoesParaMovimentar.Debito:
-                   Movimentacao.RealizarMovimentacaoDebito(conta);
+                    Movimentacao.RealizarMovimentacaoDebito(conta);
                     opcaoValida = true;
                     break;
                 case Enums.OpcoesParaMovimentar.Sair:
@@ -68,7 +96,7 @@ namespace ConsoleApp32
 
         }
 
-        
+
 
 
     }

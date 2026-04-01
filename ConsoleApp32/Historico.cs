@@ -45,7 +45,7 @@
                 }
                 else
                 {
-                    Conta.MostrarSaldo(conta);
+                    conta.MostrarSaldo(conta);
                     continua = false;
 
                 }

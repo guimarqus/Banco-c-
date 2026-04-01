@@ -20,8 +20,17 @@
             Console.WriteLine("Digite os dados do usuario");
             Console.Write("Nome do usuario: ");
             Conta.SolicitarDadosParaConta();
+            
+            
         }
-
+        public static void TextoParaEscolherTipoConta()
+        {
+            Console.WriteLine("Escolha o tipo de conta que deseja acessar:");
+            Console.WriteLine("1 - Conta Corrente");
+            Console.WriteLine("2 - Conta Poupança");
+            Console.WriteLine("3 - Sair");
+            
+        }
         public static void TextoParaEscolhaDasOperacoes()
         {
             Console.Clear();
@@ -52,11 +61,13 @@
         }
         public static void MostraResultadoDebito(Conta conta, Movimentacao mov)
         {
-            Console.WriteLine($"Foram debitados {mov.Valor}$ da sua conta, seu saldo atual é {conta.SaldoBancario}$");
+            Console.WriteLine($"Foram debitados R${mov.Valor} da sua conta, seu saldo atual é R${conta.SaldoBancario}");
             Console.WriteLine("Deseja realizar outra operação? (digite 0 para continuar ou digite " +
             "qualquer número para seguir ao menu) ");
 
         }
+       
+        
         public static void SairDoHistorico()
         {
             Console.WriteLine("--------------------------------------------------------------------------------------");
