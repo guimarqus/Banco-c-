@@ -1,0 +1,102 @@
+📄 Demanda — Evolução do Sistema de Conta Bancária
+
+Você vai evoluir a aplicação de console já existente para suportar diferentes tipos de conta e comportamentos distintos de movimentação, aplicando conceitos de orientação a objetos.
+
+O foco não é só fazer funcionar — é modelar corretamente o domínio.
+
+🎯 Objetivo
+
+Refatorar e evoluir o sistema atual para que ele suporte:
+
+Tipos diferentes de conta com regras próprias
+Movimentações com comportamentos distintos
+Código extensível sem depender de if ou switch para decidir regras
+🧩 Cenário
+
+Hoje o sistema possui:
+
+Uma conta simples
+Movimentações de débito e crédito
+Menu interativo
+
+Agora precisamos torná-lo mais próximo de um sistema real.
+
+📌 O que deve ser implementado
+1. Tipos de Conta
+
+O sistema deve permitir criar diferentes tipos de conta:
+
+Conta Corrente
+Conta Poupança
+
+Cada uma deve ter comportamento próprio.
+
+Regras:
+
+Conta Corrente
+
+Pode ficar com saldo negativo até um limite (ex: -500)
+
+Conta Poupança
+
+Não pode ficar negativa
+Possui rendimento (ex: aumentar saldo em 1%)
+2. Estrutura da Conta
+
+A conta não deve mais ser uma classe única.
+
+Ela deve representar um conceito genérico, permitindo especializações.
+
+👉 Esperado:
+
+Uma estrutura que permita diferentes comportamentos por tipo de conta
+Cada tipo de conta sendo responsável por validar suas próprias regras
+3. Movimentações
+
+Hoje débito e crédito são tratados de forma simples.
+
+Agora cada tipo de movimentação deve ter seu próprio comportamento.
+
+Tipos:
+Crédito
+Débito
+Requisitos:
+Cada movimentação deve saber como impactar a conta
+Evitar centralizar lógica dentro da conta
+4. Regras de Negócio
+Débito reduz saldo
+Crédito aumenta saldo
+Conta Corrente respeita limite negativo
+Conta Poupança nunca pode ficar negativa
+Rendimento só pode ser aplicado em Conta Poupança
+5. Menu
+
+Na criação da conta:
+
+Usuário deve escolher o tipo da conta
+
+No menu principal:
+
+Manter opções existentes
+Adicionar opção para aplicar rendimento (somente para poupança)
+⚠️ Restrições importantes
+Não usar if ou switch para decidir comportamento baseado em tipo
+Não colocar regra de negócio dentro do Menu
+Não deixar a conta expor diretamente seu estado para alteração
+📌 O que será avaliado
+Se o comportamento está distribuído nas classes corretas
+Se o código evita decisões baseadas em tipo (if tipo == ...)
+Se está fácil adicionar um novo tipo de conta ou movimentação
+Se as regras estão dentro do domínio e não na interface
+Clareza e organização do código
+💡 Dica
+
+Se para adicionar um novo tipo de conta ou movimentação você precisar sair alterando várias classes, tem algo errado na modelagem.
+
+🎯 Resultado esperado
+
+Um código onde:
+
+Cada tipo de conta tem seu próprio comportamento
+Cada movimentação sabe o que fazer
+O sistema é fácil de evoluir sem quebrar o que já existe
