@@ -1,4 +1,6 @@
-﻿using static ConsoleApp32.Movimentacao;
+﻿using static ConsoleApp32.Enums;
+using static ConsoleApp32.Movimentacao;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleApp32
 {
@@ -9,53 +11,43 @@ namespace ConsoleApp32
         {
         }
 
-        public override decimal ObterSaldoBancario()
-        {
-            return SaldoBancario;
-        }
 
-        public override void SomarContaCredito(decimal valor)
+        public override void SomarContaCredito (decimal valor)
         {
-            SaldoBancario += valor;
-            Movimentacoes.Add(CriarMov(valor, TipoMovimentacao.Credito));
+            saldoBancario += valor;
+            
         }
 
         public override void SubtrairContaDebito(decimal valor)
         {
-            if (SaldoBancario < valor)
+            if (saldoBancario < valor)
             {
                 Console.WriteLine("Não foi possivel debitar na sua Poupança");
-                Thread.Sleep(1000);
                 return;
             }
-            SaldoBancario -= valor;
-            Movimentacoes.Add(CriarMov(valor, TipoMovimentacao.Debito));
+            Console.WriteLine($"Foram debitados R${valor} da sua conta");
+            saldoBancario -= valor;
+            
         }
       
-        public static void RendimentoPoupanca(Conta conta)
-        {
-            
-            decimal rendimento = conta.SaldoBancario * 0.001m;
-            rendimento += conta.SaldoBancario;
-            Console.WriteLine($"Saldo atual da Poupança {conta.SaldoBancario:C} com a renda diária de 0.1% é R${rendimento}");
-        }
+       
+        
         public override void MostrarSaldo(Conta conta)
         {
             bool continua = true;
             while (continua)
             {
                 Console.WriteLine();
-                Console.Write($"Bem vindo {conta.Nome}  \n");
+                Console.Write($"Bem vindo {conta.Nome} o saldo atual de sua Poupança é \n");
                 Console.ForegroundColor = ConsoleColor.Green;
-                RendimentoPoupanca(conta);
-               
+                Console.Write($"{conta.saldoBancario:C}");
                 Console.ResetColor();
                 Instrucoes.SairDoSaldo();
                 int optSaldo = int.Parse(Console.ReadLine());
                 if (optSaldo > 0)
                 {
                     continua = false;
-                    Opcoes.MenuOpcoesIniciais(conta);
+                    Menu.MenuOpcoesIniciais(conta);
                 }
                 else
                 {
@@ -63,6 +55,35 @@ namespace ConsoleApp32
 
                 }
 
+            }
+        }
+        public override bool PermiteRendimento()
+        {
+            return true;
+        }
+
+        public override void MostrarRendimento(Conta conta)
+        {
+            bool continua = true;
+            while (continua)
+            {
+                decimal rendimento = conta.saldoBancario * 0.001m;
+                rendimento += conta.saldoBancario;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($" Saldo atual da Poupança {conta.saldoBancario:C} com a renda diária de 0.1% é R${rendimento}");
+                Console.ResetColor();
+                Instrucoes.SairDoSaldo();
+                int optSaldo = int.Parse(Console.ReadLine());
+                if (optSaldo > 0)
+                {
+                    continua = false;
+                    Menu.MenuOpcoesIniciais(conta);
+                }
+                else
+                {
+                    continua = true;
+
+                }
             }
         }
     }

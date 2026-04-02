@@ -13,6 +13,7 @@
             Movimentar = 1,
             Historico,
             Saldo,
+            Rendimento,
             Voltar,
         }
 
@@ -22,6 +23,12 @@
             Credito = 1,
             Debito,
             Sair,
+
+        }
+        public enum TipoMovimentacao
+        {
+            Credito = 1,
+            Debito,
 
         }
 

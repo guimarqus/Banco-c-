@@ -2,12 +2,7 @@
 {
     class Historico
     {
-        private Conta conta;
-
-        public Historico(Conta conta) 
-        { this.conta = conta; }
-
-
+       
         public static void MostrarHistorico(Conta conta)
         {
             bool continua = true;
@@ -21,7 +16,7 @@
                     if (optSaldo > 0)
                     {
                         continua = false;
-                        Opcoes.MenuOpcoesIniciais(conta);
+                        Menu.MenuOpcoesIniciais(conta);
                     }
                     else
                     {
@@ -41,7 +36,7 @@
                 if (optOutroSaldo > 1)
                 {
                     continua = false;
-                    Opcoes.MenuOpcoesIniciais(conta);
+                    Menu.MenuOpcoesIniciais(conta);
                 }
                 else
                 {

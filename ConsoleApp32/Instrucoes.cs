@@ -11,7 +11,8 @@
             Console.WriteLine("1- Movimentar sua Conta");
             Console.WriteLine("2- Visualizar o Historico");
             Console.WriteLine("3- Acessar o Saldo");
-            Console.WriteLine("4- Sair");
+            Console.WriteLine("4- Ver o Rendimento");
+            Console.WriteLine("5- Sair");
             Console.WriteLine();
 
         }
@@ -19,7 +20,7 @@
         {
             Console.WriteLine("Digite os dados do usuario");
             Console.Write("Nome do usuario: ");
-            Conta.SolicitarDadosParaConta();
+            Menu.SolicitarDadosParaConta();
             
             
         }
@@ -45,26 +46,28 @@
         {
 
             Console.WriteLine("Digite o valor que voce deseja adicionar");
-            Console.WriteLine($"O seu saldo atual é de {conta.SaldoBancario}$");
+            Console.WriteLine($"O seu saldo atual é de R${conta.saldoBancario}");
         }
         public static void MostrarResultadoCredito(Conta conta, Movimentacao mov)
         {
-            Console.WriteLine($"Foram adicionados {mov.Valor}$ a sua conta, seu saldo atual é de {conta.SaldoBancario}$");
+            Console.WriteLine($"Foram adicionados R${mov.Valor} a sua conta, seu saldo atual é de R${conta.saldoBancario}");
             Console.WriteLine("Deseja realizar outra operação? (digite 0 para adicionar mais ao seu saldo ou digite " +
                 "qualquer número para seguir ao menu) ");
+           
         }
 
         public static void DebitarSaldo(Conta conta)
         {
             Console.WriteLine("Digite o valor que voce deseja debitar");
-            Console.WriteLine($"O seu saldo atual é de {conta.SaldoBancario}$");
+            Console.WriteLine($"O seu saldo atual é de R${conta.saldoBancario}");
         }
         public static void MostraResultadoDebito(Conta conta, Movimentacao mov)
         {
-            Console.WriteLine($"Foram debitados R${mov.Valor} da sua conta, seu saldo atual é R${conta.SaldoBancario}");
+            Console.WriteLine($"O seu saldo atual é R${conta.saldoBancario}");
             Console.WriteLine("Deseja realizar outra operação? (digite 0 para continuar ou digite " +
             "qualquer número para seguir ao menu) ");
-
+             
+            
         }
        
         
@@ -84,6 +87,8 @@
             Console.WriteLine();
             Console.WriteLine("Deseja voltar ao menu de operações? (digite 0 para continuar no menu ou qualquer numero para prosseguir)");
         }
+
+       
 
     }
 }

@@ -1,21 +1,20 @@
 ﻿using static ConsoleApp32.Movimentacao;
-
+using System.Collections.Generic;
 namespace ConsoleApp32
 {
     abstract class Conta
     {
-        public decimal SaldoBancario {  get; protected set; }
+        public decimal saldoBancario {  get; protected set; }
         public int Id { get; private set; }
         public string Nome { get; protected set; }
         public List<Movimentacao> Movimentacoes { get; private set; }
         
-        public Conta() { }
 
         protected Conta(string nome)
         {
             Id = Random.Shared.Next();
             Nome = nome;
-            SaldoBancario = ObterSaldoBancario();
+            saldoBancario = saldoBancario;
             Movimentacoes = new List<Movimentacao>();
             
         }
@@ -23,23 +22,37 @@ namespace ConsoleApp32
 
         public abstract void SubtrairContaDebito(decimal valor);
 
-
-        public static void SolicitarDadosParaConta()
+        public void AplicandoMovimentacao(Movimentacao movimentacao)
         {
-            
-            var nome = Console.ReadLine();
-            Instrucoes.TextoParaEscolherTipoConta();
-            Conta conta = Opcoes.MenuParaCriacaoConta(nome);
-            Opcoes.MenuOpcoesIniciais(conta);
-
+            movimentacao.Movimentar(this);
+            Movimentacoes.Add(movimentacao);
         }
-
-        public abstract decimal ObterSaldoBancario();
-
-
 
         public abstract void MostrarSaldo(Conta conta);
         
+        public virtual void MostrarRendimento(Conta conta)
+        {
+            bool continua = true;
+            while (continua)
+            {
+                Console.WriteLine("Esta conta não realiza o rendimento");
+                Instrucoes.SairDoSaldo();
+                
+                int optSaldo = int.Parse(Console.ReadLine());
+                if (optSaldo > 0)
+                {
+                    continua = false;
+                    Menu.MenuOpcoesIniciais(conta);
+                }
+                else
+                {
+                    continua = true;
+
+                }
+            }
+        }
+        public virtual bool PermiteRendimento() 
+        => false;
 
     }
 }

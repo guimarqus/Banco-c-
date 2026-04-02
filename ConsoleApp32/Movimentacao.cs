@@ -1,6 +1,8 @@
-﻿namespace ConsoleApp32
+﻿using static ConsoleApp32.Enums;
+
+namespace ConsoleApp32
 {
-    class Movimentacao
+    abstract class Movimentacao
     {
 
         public int Id { get; private set; }
@@ -8,91 +10,22 @@
         public decimal Valor { get; private set; }
         public DateTime Date { get; private set; }
 
-        private Movimentacao(decimal valor, TipoMovimentacao tipoMovimentacao)
+
+        protected Movimentacao(decimal valor, TipoMovimentacao tipoMovimentacao)
         {
             Id = Random.Shared.Next();
             Valor = valor;
             TipodeMovimentacao = tipoMovimentacao;
             Date = DateTime.UtcNow;
         }
-        public static void AcessarMenuMovimentacao(Conta conta)
-        {
-            Console.Clear();
-            bool opcaoValida = false;
+        
 
-            while (!opcaoValida)
-            {
-                Instrucoes.TextoParaEscolhaDasOperacoes();
-                Opcoes.MenuOpcoesParaMovimentar(conta);
-            }
-        }
-       
-        public static void RealizarMovimentacaoCredito(Conta conta)
-        {
-            bool repetir = true;
-            while (repetir)
-            {
-                Instrucoes.AdicionarCredito(conta);
-                decimal creditoAdd = decimal.Parse(Console.ReadLine());
-                Movimentacao mov = CriarMov(creditoAdd, TipoMovimentacao.Credito);
-                conta.SomarContaCredito(mov.Valor);
-                Instrucoes.MostrarResultadoCredito(conta, mov);
-                int continuarOperacao = int.Parse(Console.ReadLine());
-                if ( continuarOperacao == 0 )
-                {
-                    repetir = true;
-                }
-                else
-                {
-                    repetir = false;
-                   AcessarMenuMovimentacao(conta);
-
-                }
-            }
-        }
-        public static void RealizarMovimentacaoDebito(Conta conta)
-        {
-            bool repetir = true;
-            while ((repetir))
-            {
-                Instrucoes.DebitarSaldo(conta);
-                decimal debitoRemov = decimal.Parse(Console.ReadLine());
-                Movimentacao mov = CriarMov(debitoRemov, TipoMovimentacao.Debito);
-                conta.SubtrairContaDebito(debitoRemov);
-                Instrucoes.MostraResultadoDebito(conta, mov);
-               
-                int continuarOperacao = int.Parse(Console.ReadLine());
-                if (continuarOperacao == 0)
-                {
-                    repetir = true;
-                }
-                else
-                {
-                    repetir = false;
-                    AcessarMenuMovimentacao(conta);
-
-                }
-            }
-            Console.WriteLine();
-        }
+        public abstract void Movimentar(Conta conta);
+         
             
         
 
-        public enum TipoMovimentacao
-        {
-            Credito = 1,
-            Debito,
-
-        }
-
-
        
-        public static Movimentacao CriarMov(decimal valor, TipoMovimentacao tipoMovimentacao)
-        {
 
-            return new Movimentacao(valor, tipoMovimentacao);
-
-
-        }
     }
 }
