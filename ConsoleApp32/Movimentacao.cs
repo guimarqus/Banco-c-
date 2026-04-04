@@ -16,9 +16,10 @@ namespace ConsoleApp32
             Id = Random.Shared.Next();
             Valor = valor;
             TipodeMovimentacao = tipoMovimentacao;
-            Date = DateTime.UtcNow;
+            Date = DateTime.Now;
         }
         
+
 
         public abstract void Movimentar(Conta conta);
          

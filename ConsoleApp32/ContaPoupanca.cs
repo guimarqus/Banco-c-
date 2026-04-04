@@ -38,7 +38,7 @@ namespace ConsoleApp32
             while (continua)
             {
                 Console.WriteLine();
-                Console.Write($"Bem vindo {conta.Nome} o saldo atual de sua Poupança é \n");
+                Console.Write($" Bem vindo {conta.Nome} o saldo atual de sua Poupança é \n");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($"{conta.saldoBancario:C}");
                 Console.ResetColor();
@@ -70,6 +70,7 @@ namespace ConsoleApp32
                 decimal rendimento = conta.saldoBancario * 0.001m;
                 rendimento += conta.saldoBancario;
                 Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine();
                 Console.WriteLine($" Saldo atual da Poupança {conta.saldoBancario:C} com a renda diária de 0.1% é R${rendimento}");
                 Console.ResetColor();
                 Instrucoes.SairDoSaldo();
